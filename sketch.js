@@ -1,6 +1,7 @@
 var bow , arrow,  scene;
 var bowImage, arrowImage, green_balloonImage, red_balloonImage, pink_balloonImage ,blue_balloonImage, backgroundImage;
-var balloongroup, arrowgroup
+var arrowgroup
+var redg, blueg, greeng, pinkg
 var score=0;
 
 function preload(){
@@ -29,9 +30,14 @@ function setup() {
   bow = createSprite(380,220,20,50);
   bow.addImage(bowImage); 
   bow.scale = 1;
-  balloongroup = new Group()
+  
   
    score = 0    
+   redg = new Group()
+   blueg = new Group()
+   greeng = new Group()
+   pinkg = new Group()
+   arrowgroup = new Group()
 }
 
 function draw() {
@@ -66,8 +72,25 @@ function draw() {
       pinkBalloon();
     }
   }  
-  if(arrowgroup.isTouching(balloongroup)){
+  if(arrowgroup.isTouching(redg)){
     score = score + 1
+    redg.destroyEach()
+    arrowgroup.destroyEach()
+  }
+  if(arrowgroup.isTouching(blueg)){
+    score = score + 2
+    blueg.destroyEach()
+    arrowgroup.destroyEach()
+  }
+  if(arrowgroup.isTouching(greeng)){
+    score = score + 3
+    greeng.destroyEach()
+    arrowgroup.destroyEach()
+  }
+  if(arrowgroup.isTouching(pinkg)){
+    score = score + 1
+    pinkg.destroyEach()
+    arrowgroup.destroyEach()
   }
   drawSprites();
   text("Score: "+ score, 300,50);
@@ -83,7 +106,7 @@ function draw() {
   arrow.velocityX = -4;
   arrow.lifetime = 100;
   arrow.scale = 0.3;
-  balloongroup.add(arrow)
+  arrowgroup.add(arrow)
 }
 
 function redBalloon() {
@@ -92,7 +115,7 @@ function redBalloon() {
   red.velocityX = 3;
   red.lifetime = 150;
   red.scale = 0.1;
-  balloongroup.add(red_balloonImage)
+  redg.add(red)
 }
 
 function blueBalloon() {
@@ -101,7 +124,7 @@ function blueBalloon() {
   blue.velocityX = 3;
   blue.lifetime = 150;
   blue.scale = 0.1;
-  balloongroup.add(blue_balloonImage)
+  blueg.add(blue)
 }
 
 function greenBalloon() {
@@ -110,7 +133,7 @@ function greenBalloon() {
   green.velocityX = 3;
   green.lifetime = 150;
   green.scale = 0.1;
-  balloongroup.add(green_balloonImage)
+  greeng.add(green)
 }
 
 function pinkBalloon() {
@@ -119,5 +142,5 @@ function pinkBalloon() {
   pink.velocityX = 3;
   pink.lifetime = 150;
   pink.scale = 1
-  balloongroup.add(pink_balloonImage)
+  pinkg.add(pink)
 }
